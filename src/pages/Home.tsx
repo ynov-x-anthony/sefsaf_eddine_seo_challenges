@@ -1,19 +1,20 @@
 import { Link } from 'react-router-dom'
 import { products } from '../data'
-
-// Mission : le <title> de l'onglet ne change jamais ("Vite + React + TS"),
-// et les liens produits utilisent ?id=... au lieu d'une URL propre.
+import { useDocumentMeta } from '../useDocumentMeta'
 
 export default function Home() {
+  useDocumentMeta({
+    title: 'Boutique vélo et accessoires | CycloShop',
+    description: 'Découvrez notre catalogue de vélos électriques, VTT et accessoires au meilleur prix.',
+  })
+
   return (
     <div className="page">
-      <h1>CycloShop</h1>
-      <p>Tout l'équipement pour rouler en ville, toute l'année.</p>
-
+      <h1>Notre catalogue</h1>
       <ul>
-        {products.map((p) => (
+        {products.map((p: any) => (
           <li key={p.id}>
-            <Link to={`/product?id=${p.id}`}>{p.name}</Link>
+            <Link to={`/produits/${p.slug}`}>{p.name}</Link>
           </li>
         ))}
       </ul>
